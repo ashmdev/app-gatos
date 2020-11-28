@@ -19,8 +19,13 @@ const Navigation = () => (
             }}
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ color }) => screenOptions(route, color),
+                navigationOptions: ({ navigation }) => ({
+                    tabBarOnPress: (scene, jumpToIndex) => {
+                        console.log('onPress:', scene.route);
+                        jumpToIndex(scene.index);
+                    }
+                })
             })}
-            screenProps={{date:new Date().getMinutes()}}
         >
             <Tab.Screen
                 name="cats"

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import { HEADER, CAT_API_URL, CAT_API_VERSION, CAT_API_KEY } from "../../utils/api";
-import CatListItem from "../../components/CatListItem"
+import { API_LOCAL, API_LOCAL_PORT, API_LOCAL_ENDPOINT } from "../../utils/api";
+import CatListItem from "../../components/CatListItem";
 
 const List = () => {
     const navigation = useNavigation();
@@ -28,7 +29,7 @@ const List = () => {
             const json = await response.json();
             const image = await json[0].url;
             console.log(image);
-            await saveCatOnHistory(cat,image);
+            await saveCatOnHistory(cat, image);
             navigation.navigate("images", { url: image });
         } catch (error) {
             console.error(error);
@@ -37,8 +38,10 @@ const List = () => {
 
     //Guardo las razas visualizadas en el API Laravel
     const saveCatOnHistory = async (cat, image) => {
-        try{
-            fetch('http://192.168.0.31:8000/api/cats/', {
+        try {
+            `${API_LOCAL}:${API_LOCAL_PORT}${API_LOCAL_ENDPOINT}`
+
+            fetch(`${API_LOCAL}:${API_LOCAL_PORT}${API_LOCAL_ENDPOINT}`, {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -53,7 +56,7 @@ const List = () => {
             });
 
         }
-        catch(error){
+        catch (error) {
             console.error(error);
         }
     }

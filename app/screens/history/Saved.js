@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import CatListItem from "../../components/CatListItem"
+import CatListItem from "../../components/CatListItem";
 
+import { API_LOCAL, API_LOCAL_PORT, API_LOCAL_ENDPOINT } from "../../utils/api";
 
 const Saved = () => {
 
@@ -10,7 +11,7 @@ const Saved = () => {
 
     useEffect(() => {
         //hago una petición al api laravel para traer el historial
-        fetch("http://192.168.0.31:8000/api/cats/", {
+        fetch(`${API_LOCAL}:${API_LOCAL_PORT}${API_LOCAL_ENDPOINT}`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
