@@ -18,13 +18,7 @@ const Navigation = () => (
                 activeTintColor: "#00a680",
             }}
             screenOptions={({ route }) => ({
-                tabBarIcon: ({ color }) => screenOptions(route, color),
-                navigationOptions: ({ navigation }) => ({
-                    tabBarOnPress: (scene, jumpToIndex) => {
-                        console.log('onPress:', scene.route);
-                        jumpToIndex(scene.index);
-                    }
-                })
+                tabBarIcon: ({ color }) => screenOptions(route, color)
             })}
         >
             <Tab.Screen

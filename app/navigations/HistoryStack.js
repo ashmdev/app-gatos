@@ -3,7 +3,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Saved from "../screens/history/Saved";
 
-
 const Stack = createStackNavigator();
 
 const HistoryStack = () => (
