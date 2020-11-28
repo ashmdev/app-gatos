@@ -4,6 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 
 import { Image } from "react-native-elements";
 
+//omponente que nuestra una imágen de la raza presionada
 const Images = ({ route }) => {
     const { url } = route.params;
     return (

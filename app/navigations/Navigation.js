@@ -20,6 +20,7 @@ const Navigation = () => (
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ color }) => screenOptions(route, color),
             })}
+            screenProps={{date:new Date().getMinutes()}}
         >
             <Tab.Screen
                 name="cats"
