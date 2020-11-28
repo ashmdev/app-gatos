@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, ActivityIndicator, StyleSheet } from "react-native";
-import { ListItem } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 
 import { HEADER, CAT_API_URL, CAT_API_VERSION } from "../../utils/api";
+import CatListItem from "../../components/CatListItem"
 
 const List = () => {
     const navigation = useNavigation();
 
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    const [image, setImage] = useState("");
 
     useEffect(() => {
         fetch(`${CAT_API_URL}${CAT_API_VERSION}/breeds`, HEADER)
@@ -21,37 +19,22 @@ const List = () => {
     }, []);
 
     const onPress = async (cat) => {
-        fetch(`${CAT_API_URL}${CAT_API_VERSION}/images/search?breed_ids=${cat.id}&include_breeds=true`, HEADER)
-            .then((response) => response.json())
-            .then((json) => setImage(json[0].url))
-            .catch((error) => console.error(error))
-
-        navigation.navigate("images", { url: image });
+        try {
+            let response = await fetch(
+                `${CAT_API_URL}${CAT_API_VERSION}/images/search?breed_ids=${cat.id}&include_breeds=true`, HEADER
+            );
+            const json = await response.json();
+            const image = await json[0].url;
+            console.log(image);
+            navigation.navigate("images", { url: image });
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (
-        <ScrollView style={styles.container}>
-            {isLoading ? <ActivityIndicator /> : (
-                data.map((element, index) => (
-                    <ListItem key={index} bottomDivider onPress={() => onPress(element)}>
-                        <ListItem.Content>
-                            <ListItem.Title>{element.name}</ListItem.Title>
-                            <ListItem.Subtitle style={styles.listItemSubtitle}>{element.description}</ListItem.Subtitle>
-                        </ListItem.Content>
-                    </ListItem>
-                ))
-            )}
-        </ScrollView>
+        <CatListItem procedure={onPress} data={data} isLoading={isLoading} />
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    listItemSubtitle: {
-        textAlign: "justify"
-    }
-});
 
 export default List;
