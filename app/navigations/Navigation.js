@@ -1,6 +1,6 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "react-native-elements";
 
 import CatStack from "./CatsStack";
@@ -9,7 +9,7 @@ import HistoryStack from "./HistoryStack";
 
 const Tab = createBottomTabNavigator();
 
-const Navigation = ()=>(
+const Navigation = () => (
     <NavigationContainer>
         <Tab.Navigator
             initialRouteName="Home"
@@ -21,15 +21,15 @@ const Navigation = ()=>(
                 tabBarIcon: ({ color }) => screenOptions(route, color),
             })}
         >
-            <Tab.Screen 
-                name = "cats" 
-                component = {CatStack} 
-                options = {{ title: "Gatos" }}
+            <Tab.Screen
+                name="cats"
+                component={CatStack}
+                options={{ title: "Gatos" }}
             />
-            <Tab.Screen 
-                name="history" 
-                component={HistoryStack} 
-                options = {{ title: "Historial" }}
+            <Tab.Screen
+                name="history"
+                component={HistoryStack}
+                options={{ title: "Historial" }}
             />
         </Tab.Navigator>
     </NavigationContainer>
@@ -38,18 +38,18 @@ const Navigation = ()=>(
 const screenOptions = (route, color) => {
     let iconName;
     switch (route.name) {
-      case "cats":
-        iconName = "cat";
-        break;
-      case "history":
-        iconName = "history";
-        break;
-      default:
-        break;
+        case "cats":
+            iconName = "cat";
+            break;
+        case "history":
+            iconName = "history";
+            break;
+        default:
+            break;
     }
     return (
-      <Icon type="material-community" name={iconName} size={22} color={color} />
+        <Icon type="material-community" name={iconName} size={22} color={color} />
     );
-  };
+};
 
 export default Navigation;

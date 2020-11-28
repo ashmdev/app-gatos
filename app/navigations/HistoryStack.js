@@ -8,10 +8,10 @@ const Stack = createStackNavigator();
 
 const HistoryStack = () => (
     <Stack.Navigator>
-        <Stack.Screen 
-            name = "saved"
-            component = { Saved }
-            options = {{ title: "Historial"}}
+        <Stack.Screen
+            name="saved"
+            component={Saved}
+            options={{ title: "Historial" }}
         />
     </Stack.Navigator>
 );
